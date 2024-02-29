@@ -1,0 +1,32 @@
+version: "3.7"
+services:
+    app:
+        build:
+            args:
+                 user: ipunk
+                 uid: 1000
+            context: ./
+            dockerfile: Dockerfile
+        image: praweb-laravel
+        container_name: praweb-app
+        restart: unless-stopped
+        working_dir: /var/www/praweblaravel
+        volumes:
+            - ./src:/var/www/praweblaravel
+        networks:
+            - company_profile			
+    nginx:
+        image: nginx:alpine
+        container_name: praweb-nginx
+        restart: unless-stopped
+        ports:
+            - 80:80
+        volumes:
+            - ./src:/var/www/praweblaravel
+            - ./docker-compose/nginx:/etc/nginx/conf.d/
+        networks:
+            - company_profile
+
+networks:
+    company_profile:
+        driver: bridge
