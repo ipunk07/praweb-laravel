@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use app\Http\Controllers\MenuController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,3 +23,11 @@ Route::get('/home', function () {
 Route::get('/about', function () {
     return view('about');
 });
+Route::get('/menu', function () {
+    // Controller logic to handle the menu request
+    return view('menu'); // Or redirect to a different view
+})->name('menu');
+Route::get('/landing', function () {
+    return view('landing');
+});
+
